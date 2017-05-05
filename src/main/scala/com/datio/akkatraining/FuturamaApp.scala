@@ -2,8 +2,10 @@ package com.datio.akkatraining
 
 import akka.actor._
 import akka.event.Logging
+import akka.pattern.ask
 import akka.stream.ActorMaterializer
 import akka.util.Timeout
+import com.datio.akkatraining.actor._
 
 import scala.concurrent.duration._
 
