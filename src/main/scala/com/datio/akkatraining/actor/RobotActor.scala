@@ -9,6 +9,7 @@ object RobotActor {
 
 class RobotActor extends Actor with ActorLogging {
   def receive: Receive = {
-    case _ => log.info("Robot receiving message")
+    case x => log.info(s"Robot receiving message $x")
+    case _ => log.info("Default message")
   }
 }

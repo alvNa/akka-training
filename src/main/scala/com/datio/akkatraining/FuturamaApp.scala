@@ -20,5 +20,17 @@ object FuturamaApp extends App {
 
   log.info(s">>> ${getClass.getName()} Welcome to the year 3000!!")
 
+  val humanActor = system.actorOf(Props[HumanActor], "Fry")
+  val robotActor = system.actorOf(Props[RobotActor], "Bender")
+  val alienActor = system.actorOf(Props[AlienActor], "Zoidberg")
+  val mutantActor = system.actorOf(Props[MutantActor], "Leela")
+
+  //Actor's first call with a message
+  humanActor ? "hello"
+  robotActor ? "bip bip"
+  alienActor ? "grlhhrrlterlal"
+  mutantActor ? "hi"
+
+
   system.terminate()
 }
