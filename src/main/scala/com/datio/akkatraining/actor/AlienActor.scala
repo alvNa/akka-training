@@ -4,7 +4,7 @@ import akka.actor.{Actor, ActorLogging, Props}
 
 
 object AlienActor {
-  def props(): Props = Props(classOf[HumanActor])
+  def props(): Props = Props(classOf[AlienActor])
 }
 
 class AlienActor extends Actor with ActorLogging {
