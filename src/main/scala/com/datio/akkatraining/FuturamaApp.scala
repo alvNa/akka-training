@@ -26,8 +26,11 @@ object FuturamaApp extends App {
   val robotActor = system.actorOf(RobotActor.props, "Bender")
 
   //Actor's first call with a message
-  humanActor ? "Good news everyone!"
-  robotActor ? "Bite my shiny metal ass"
+  val future = humanActor ? "Do a job!"
+
+  future.onSuccess{
+    case x => log.info(s"$x")
+  }
 
   system.terminate
 }
