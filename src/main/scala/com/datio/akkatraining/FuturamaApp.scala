@@ -23,11 +23,9 @@ object FuturamaApp extends App {
   log.info(s">>> ${getClass.getName()} Welcome to the year 3000!!")
 
   val humanActor = system.actorOf(HumanActor.props, "Professor_Farnsworth")
-  val robotActor = system.actorOf(RobotActor.props, "Bender")
 
   //Actor's first call with a message
-  humanActor ? "Good news everyone!"
-  robotActor ? "Bite my shiny metal ass"
+  humanActor ! "Good news everyone!"
 
   system.terminate
 }
