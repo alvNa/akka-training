@@ -2,6 +2,6 @@ package com.datio.akkatraining.Json
 
 case class BeerRequest(client: String,
                        number: Long,
-                       trade: Option[String] = Some("Estrella Galicia"))
+                       trade: String)
 
-case class ClientInfo(defaulter: Boolean, reason: Option[String])
+case class ClientInfo(defaulter: Boolean, reason: String)
