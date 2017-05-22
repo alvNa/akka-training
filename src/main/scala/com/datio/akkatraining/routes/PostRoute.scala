@@ -6,7 +6,7 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.unmarshalling.Unmarshaller._
 import akka.pattern.ask
 import akka.util.Timeout
-import com.datio.akkatraining.Json.{PickRequest, HttpResponse => response}
+import com.datio.akkatraining.json.{PickRequest, HttpResponse => response}
 import com.datio.akkatraining.routes.ResponseManager._
 
 trait PostRoute {
@@ -15,7 +15,7 @@ trait PostRoute {
 
   def postRoute(client: String): Route =
     post {
-      path("bar" / "beer" / "Leela")
+      path("bar" / "beer" / "leela")
       parameters('proposal.?) { proposal =>
         processFuture(leela ? PickRequest(client, proposal))
       }

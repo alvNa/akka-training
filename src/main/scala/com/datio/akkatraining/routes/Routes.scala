@@ -3,7 +3,7 @@ package com.datio.akkatraining.routes
 import akka.http.scaladsl.server.Directives._
 import akka.http.scaladsl.server.Route
 import akka.util.Timeout
-import com.datio.akkatraining.Json.{HttpResponse => response}
+import com.datio.akkatraining.json.{HttpResponse => response}
 import com.datio.akkatraining.config.Configuration
 
 import scala.concurrent.duration._

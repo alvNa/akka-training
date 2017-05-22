@@ -1,4 +1,4 @@
-package com.datio.akkatraining.Json
+package com.datio.akkatraining.json
 
 case class BeerRequest(client: String,
                        number: Long,

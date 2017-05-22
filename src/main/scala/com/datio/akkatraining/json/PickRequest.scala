@@ -1,3 +1,3 @@
-package com.datio.akkatraining.Json
+package com.datio.akkatraining.json
 
 case class PickRequest(client: String, proposal: Option[String])

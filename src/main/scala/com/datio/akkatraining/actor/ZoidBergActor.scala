@@ -1,7 +1,7 @@
 package com.datio.akkatraining.actor
 
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
-import com.datio.akkatraining.Json.{BeerRequest, ClientInfo}
+import com.datio.akkatraining.json.{BeerRequest, ClientInfo}
 import com.datio.akkatraining.config.Configuration
 
 class ZoidBergActor extends Actor
@@ -17,7 +17,7 @@ class ZoidBergActor extends Actor
   override def receive: Receive = {
     case req @ BeerRequest(_,_,_) => {
       log.info("BeerRequest, client: {}, number: {}, trade: {}", req.client, req.number, req.trade)
-      bender forward (req, ClientInfo(isDefaulter(req.client), "is defaulter"))
+      bender forward (req, isDefaulter(req.client))
     }
   }
 }

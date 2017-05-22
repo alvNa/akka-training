@@ -6,7 +6,7 @@ import akka.http.scaladsl.server.Route
 import akka.http.scaladsl.unmarshalling.Unmarshaller._
 import akka.pattern.ask
 import akka.util.Timeout
-import com.datio.akkatraining.Json.BeerRequest
+import com.datio.akkatraining.json.BeerRequest
 import com.datio.akkatraining.config.Configuration
 import com.datio.akkatraining.routes.ResponseManager._
 

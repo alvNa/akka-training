@@ -6,7 +6,7 @@ import akka.http.scaladsl.model.StatusCodes.{Forbidden, Unauthorized, _}
 import akka.http.scaladsl.model.{HttpEntity, Uri}
 import akka.http.scaladsl.server.{MissingHeaderRejection, MissingQueryParamRejection}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
-import akka.testkit.TestActorRef
+import akka.testkit.{TestActorRef, TestKit}
 import com.datio.akkatraining.actor.{LeelaActor, ZoidBergActor}
 import com.datio.akkatraining.config.ClientHeader
 import com.datio.akkatraining.routes.Routes
@@ -21,6 +21,9 @@ class ServiceAkkaHttpGetTest extends WordSpec
   override implicit val zoidBerg: ActorRef = TestActorRef(Props[ZoidBergActor])
   override implicit val leela: ActorRef = TestActorRef(Props[LeelaActor])
 
+  override def afterAll {
+    TestKit.shutdownActorSystem(system)
+  }
 
   val client: String = "fry"
 

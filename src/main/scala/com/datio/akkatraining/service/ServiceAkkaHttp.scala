@@ -14,13 +14,13 @@ object ServiceAkkaHttp extends scala.App
   with Logging
   with Routes {
 
-  implicit val system = ActorSystem("Mercurio-Dictionary-Service")
+  implicit val system = ActorSystem("Futurama-Service")
   implicit val materializer = ActorMaterializer()
   implicit val executor: ExecutionContext = system.dispatcher
 
-  val zoidBerg: ActorRef = system.actorOf(ZoidBergActor.props(),
+  implicit val zoidBerg: ActorRef = system.actorOf(ZoidBergActor.props(),
     "ZoidBerg-Actor")
-  val leela: ActorRef = system.actorOf(LeelaActor.props(),
+  implicit val leela: ActorRef = system.actorOf(LeelaActor.props(),
     "Leela-Actor")
 
 
@@ -28,7 +28,7 @@ object ServiceAkkaHttp extends scala.App
   val port = getKey[Int](servicePort)
   val bindingFuture = Http().bindAndHandle(routes, host, port)
 
-  log.debug(s"Opening Service ${system.name} in $host:$port")
+  log.info(s"Opening Service ${system.name} in $host:$port")
 
   bindingFuture.onFailure {
     case _: Exception =>

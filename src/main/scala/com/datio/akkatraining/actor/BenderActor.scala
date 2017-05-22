@@ -2,15 +2,15 @@ package com.datio.akkatraining.actor
 
 import akka.actor.{Actor, ActorLogging, Props}
 import akka.http.scaladsl.model.StatusCodes.{Forbidden, OK}
-import com.datio.akkatraining.Json.{BeerRequest, ClientInfo, HttpResponse}
+import com.datio.akkatraining.json.{BeerRequest, ClientInfo, HttpResponse}
 import com.datio.akkatraining.config.Configuration
 
 class BenderActor extends Actor
   with ActorLogging with Configuration {
   override def receive: Receive = {
 
-    case (req @ BeerRequest(_,_,_), metaInfo @ ClientInfo(_,_)) => {
-      if(!metaInfo.defaulter){
+    case (req: BeerRequest, metainfo: Boolean)=> {
+      if(metainfo){
         log.info("client: {}, is not defaulter", req.client)
         sender ! Right(HttpResponse(OK.intValue, Some(s"Thanks! your beer: ${req.trade}")))
       }else{

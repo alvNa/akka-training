@@ -4,7 +4,7 @@ import akka.http.scaladsl.model.HttpResponse
 import akka.http.scaladsl.model.StatusCodes.{BadRequest, InternalServerError, NoContent, NotFound}
 import akka.http.scaladsl.server.Directives.{complete, onComplete}
 import akka.http.scaladsl.server.Route
-import com.datio.akkatraining.Json.{HttpResponse => response}
+import com.datio.akkatraining.json.{HttpResponse => response}
 
 import scala.concurrent.Future
 import scala.reflect.classTag
