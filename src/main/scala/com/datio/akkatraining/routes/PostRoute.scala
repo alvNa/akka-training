@@ -10,14 +10,14 @@ import com.datio.akkatraining.json.{PickRequest, HttpResponse => response}
 import com.datio.akkatraining.routes.ResponseManager._
 
 trait PostRoute {
-  implicit val leela: ActorRef
+  implicit val zoidBergPick: ActorRef
   implicit val timeout: Timeout
 
   def postRoute(client: String): Route =
     post {
       path("bar" / "beer" / "leela")
       parameters('proposal.?) { proposal =>
-        processFuture(leela ? PickRequest(client, proposal))
+        processFuture(zoidBergPick ? PickRequest(client, proposal))
       }
     }
 }

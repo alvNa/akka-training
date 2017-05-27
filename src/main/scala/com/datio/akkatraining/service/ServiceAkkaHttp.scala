@@ -3,7 +3,7 @@ package com.datio.akkatraining.service
 import akka.actor.{ActorRef, ActorSystem}
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
-import com.datio.akkatraining.actor.{LeelaActor, ZoidBergActor}
+import com.datio.akkatraining.actor.{ZoidBergBeerActor, ZoidBergPickActor}
 import com.datio.akkatraining.config.{Configuration, Logging}
 import com.datio.akkatraining.routes.Routes
 
@@ -18,10 +18,11 @@ object ServiceAkkaHttp extends scala.App
   implicit val materializer = ActorMaterializer()
   implicit val executor: ExecutionContext = system.dispatcher
 
-  implicit val zoidBerg: ActorRef = system.actorOf(ZoidBergActor.props(),
-    "ZoidBerg-Actor")
-  implicit val leela: ActorRef = system.actorOf(LeelaActor.props(),
-    "Leela-Actor")
+  implicit val zoidBergPick: ActorRef = system.actorOf(ZoidBergPickActor.props(),
+    "ZoidBerg-Pick-Actor")
+
+  implicit val zoidBergBeer: ActorRef = system.actorOf(ZoidBergBeerActor.props(),
+    "ZoidBerg-Beer-Actor")
 
 
   val host = getKey[String](serviceAddress)
@@ -37,6 +38,4 @@ object ServiceAkkaHttp extends scala.App
   }
 
   log.info(s"Server Running on localhost:$port")
-
-
 }

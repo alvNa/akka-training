@@ -12,14 +12,15 @@ import com.datio.akkatraining.routes.ResponseManager._
 
 trait GetRoute extends Configuration {
 
-  implicit val zoidBerg: ActorRef
+  implicit val zoidBergBeer: ActorRef
+
   implicit val timeout: Timeout
 
   def getRoute(client: String): Route =
     get {
       path("bar" / "beer" / IntNumber) { beers =>
         parameters('trademark ? "Estrella Galicia") { trade =>
-          processFuture(zoidBerg ? BeerRequest(client, beers, trade))
+          processFuture(zoidBergBeer ? BeerRequest(client, beers, trade))
         }
       }
     }

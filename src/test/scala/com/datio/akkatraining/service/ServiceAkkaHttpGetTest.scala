@@ -7,7 +7,7 @@ import akka.http.scaladsl.model.{HttpEntity, Uri}
 import akka.http.scaladsl.server.{MissingHeaderRejection, MissingQueryParamRejection}
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import akka.testkit.{TestActorRef, TestKit}
-import com.datio.akkatraining.actor.{LeelaActor, ZoidBergActor}
+import com.datio.akkatraining.actor.{LeelaActor, ZoidBergBeerActor, ZoidBergPickActor}
 import com.datio.akkatraining.config.ClientHeader
 import com.datio.akkatraining.routes.Routes
 import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpec}
@@ -18,8 +18,8 @@ class ServiceAkkaHttpGetTest extends WordSpec
   with BeforeAndAfterAll
   with Routes {
 
-  override implicit val zoidBerg: ActorRef = TestActorRef(Props[ZoidBergActor])
-  override implicit val leela: ActorRef = TestActorRef(Props[LeelaActor])
+  override implicit val zoidBergBeer: ActorRef = TestActorRef(ZoidBergBeerActor.props())
+  override implicit val zoidBergPick: ActorRef = TestActorRef(ZoidBergPickActor.props())
 
   override def afterAll {
     TestKit.shutdownActorSystem(system)
