@@ -1,5 +1,6 @@
 package com.datio.akkatraining.consumer
 
+import akka.actor
 import akka.actor.{Actor, ActorLogging, ActorRef, Props}
 import akka.http.scaladsl.model.{HttpRequest, HttpResponse, StatusCode}
 
@@ -23,5 +24,10 @@ class RestConsumer(newSender: ActorRef) extends Actor with ActorLogging{
       log.info("Manager Rest Actor return bean: {}", response)
       newSender ! (status, response)
     }
+  }
+
+  override def postStop(): Unit = {
+    context stop unmarshallerActor
+    context stop requestRestActor
   }
 }

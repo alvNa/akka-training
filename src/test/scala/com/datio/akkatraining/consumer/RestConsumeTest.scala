@@ -57,6 +57,7 @@ class RestConsumeTest extends TestKit(ActorSystem("Rest-consumer"))
     TestKit.shutdownActorSystem(system)
     server.stopServer()
     actorSystem.terminate()
+    clientActor.stop()
   }
 
   val probe: TestProbe = TestProbe()
@@ -65,7 +66,7 @@ class RestConsumeTest extends TestKit(ActorSystem("Rest-consumer"))
   probe watch clientActor
 
   val response = "This is a rest client Rest!"
-val host =  "http://localhost:8080"
+  val host =  "http://localhost:8080"
   "Test Rest Client GET" should {
     "Bad request status, query not valid" in {
       probe.send(clientActor, HttpRequest(GET, uri = s"$host/service/get"))

@@ -13,18 +13,17 @@ import scala.concurrent.ExecutionContext.Implicits.global
   *
   */
 
-
 class UnmarshallRestActor extends Actor with ActorLogging {
 
   implicit val materializer: ActorMaterializer =
     ActorMaterializer(ActorMaterializerSettings(context.system))
 
-  override def receive: Receive = {
-    case HttpResponse(code, _, entity, _) => {
-      log.info("Unmarshal to pipe")
-      Unmarshal(entity).to[String].map(x=>(code, x)).pipeTo(sender)
+    override def receive: Receive = {
+      case HttpResponse(code, _, entity, _) => {
+        log.info("Unmarshal to pipe")
+        Unmarshal(entity).to[String].map(x=>(code, x)).pipeTo(sender)
+      }
     }
-  }
 }
 
 
