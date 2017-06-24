@@ -1,5 +1,5 @@
 package com.datio.akkatraining.consumer
-import akka.actor.{ActorSystem, Props}
+import akka.actor.{ActorRef, ActorSystem, Props}
 import akka.http.scaladsl.Http
 import akka.http.scaladsl.Http.ServerBinding
 import akka.http.scaladsl.marshallers.sprayjson.SprayJsonSupport
@@ -57,12 +57,11 @@ class RestConsumeTest extends TestKit(ActorSystem("Rest-consumer"))
     TestKit.shutdownActorSystem(system)
     server.stopServer()
     actorSystem.terminate()
-    clientActor.stop()
   }
 
   val probe: TestProbe = TestProbe()
-  val clientActor: TestActorRef[Nothing] =
-    TestActorRef(Props(classOf[RestConsumer], probe.ref), "test-rest-client-actor")
+  val clientActor: ActorRef =
+    system.actorOf(Props(classOf[RestConsumer], probe.ref), "test-rest-client-actor")
   probe watch clientActor
 
   val response = "This is a rest client Rest!"

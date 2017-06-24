@@ -1,13 +1,13 @@
 package com.datio.akkatraining.service
 
-import akka.actor.{ActorRef, Props}
+import akka.actor.{ActorRef, ActorRefFactory, Props}
 import akka.http.scaladsl.model.ContentTypes._
 import akka.http.scaladsl.model.StatusCodes.{Forbidden, _}
 import akka.http.scaladsl.model.{HttpEntity, Uri}
 import akka.http.scaladsl.server.MissingHeaderRejection
 import akka.http.scaladsl.testkit.ScalatestRouteTest
 import akka.testkit.{TestActorRef, TestKit}
-import com.datio.akkatraining.actor.{LeelaActor, ZoidBergBeerActor, ZoidBergPickActor}
+import com.datio.akkatraining.actor.{BenderActor, LeelaActor, ZoidBergBeerActor, ZoidBergPickActor}
 //import com.datio.akkatraining.actor.{LeelaActor, ZoidBergActor}
 import com.datio.akkatraining.config.ClientHeader
 import com.datio.akkatraining.routes.Routes
@@ -19,8 +19,15 @@ class ServiceAkkaHttpPostTest extends WordSpec
   with BeforeAndAfterAll
   with Routes {
 
-  override implicit val zoidBergBeer: ActorRef = TestActorRef(ZoidBergBeerActor.props())
-  override implicit val zoidBergPick: ActorRef = TestActorRef(ZoidBergPickActor.props())
+  val makerLeela: (ActorRefFactory) => ActorRef = (factory: ActorRefFactory) => factory.actorOf(LeelaActor.props(),
+    "Leela-Actor")
+  val makerBender: (ActorRefFactory) => ActorRef = (factory: ActorRefFactory) => factory.actorOf(BenderActor.props(),
+    "Bender-Actor")
+  override implicit val zoidBergBeer: ActorRef =
+    system.actorOf(ZoidBergBeerActor.props(makerBender))
+
+  override implicit val zoidBergPick: ActorRef =
+    system.actorOf(ZoidBergPickActor.props(makerLeela))
 
     override def afterAll {
       TestKit.shutdownActorSystem(system)

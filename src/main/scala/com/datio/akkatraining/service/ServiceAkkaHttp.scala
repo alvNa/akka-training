@@ -1,9 +1,9 @@
 package com.datio.akkatraining.service
 
-import akka.actor.{ActorRef, ActorSystem}
+import akka.actor.{ActorRef, ActorRefFactory, ActorSystem, Props}
 import akka.http.scaladsl.Http
 import akka.stream.ActorMaterializer
-import com.datio.akkatraining.actor.{ZoidBergBeerActor, ZoidBergPickActor}
+import com.datio.akkatraining.actor.{BenderActor, LeelaActor, ZoidBergBeerActor, ZoidBergPickActor}
 import com.datio.akkatraining.config.{Configuration, Logging}
 import com.datio.akkatraining.routes.Routes
 
@@ -18,10 +18,15 @@ object ServiceAkkaHttp extends scala.App
   implicit val materializer = ActorMaterializer()
   implicit val executor: ExecutionContext = system.dispatcher
 
-  implicit val zoidBergPick: ActorRef = system.actorOf(ZoidBergPickActor.props(),
+  val makerLeela: (ActorRefFactory) => ActorRef = (factory: ActorRefFactory) => factory.actorOf(LeelaActor.props(),
+    "Leela-Actor")
+  val makerBender: (ActorRefFactory) => ActorRef = (factory: ActorRefFactory) => factory.actorOf(BenderActor.props(),
+    "Bender-Actor")
+
+  implicit val zoidBergPick: ActorRef = system.actorOf(ZoidBergPickActor.props(makerLeela),
     "ZoidBerg-Pick-Actor")
 
-  implicit val zoidBergBeer: ActorRef = system.actorOf(ZoidBergBeerActor.props(),
+  implicit val zoidBergBeer: ActorRef = system.actorOf(ZoidBergBeerActor.props(makerBender),
     "ZoidBerg-Beer-Actor")
 
 

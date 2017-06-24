@@ -8,11 +8,11 @@ import akka.stream.{ActorMaterializer, ActorMaterializerSettings}
 import com.datio.akkatraining.json.{HttpResponse => response}
 
 import scala.concurrent.ExecutionContext.Implicits.global
+
 /**
   * Unmarshall Actor
   *
   */
-
 class UnmarshallRestActor extends Actor with ActorLogging {
 
   implicit val materializer: ActorMaterializer =

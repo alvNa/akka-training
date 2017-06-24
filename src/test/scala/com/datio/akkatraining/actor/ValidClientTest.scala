@@ -10,7 +10,7 @@ with BeforeAndAfterAll{
   val fakeBeerValid = BeerRequest("manolo", 12, "Cruzcampo")
   val fakeBeerInvalid = BeerRequest("fry", 12, "Mahou")
 
-  import com.datio.akkatraining.actor.ValidClientSyntax._
+  import com.datio.akkatraining.api.ValidClientSyntax._
 
   "Test Futurama BeerRequest" should {
     "invalid" in {
