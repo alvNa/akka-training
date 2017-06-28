@@ -42,5 +42,5 @@ object ServiceAkkaHttp extends scala.App
       system.terminate()
   }
 
-  log.info(s"Server Running on localhost:$port")
+  log.debug(s"Server Running on localhost:$port")
 }

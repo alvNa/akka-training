@@ -1,8 +1,7 @@
-package com.datio.akkatraining.service
+package com.datio.akkatraining.actor
 
 import akka.actor.{ActorRef, ActorRefFactory, ActorSystem, PoisonPill}
 import akka.testkit.{TestKit, TestProbe}
-import com.datio.akkatraining.actor.ZoidBergBeerActor
 import com.datio.akkatraining.json.BeerRequest
 import org.scalatest.{BeforeAndAfterAll, Matchers, WordSpecLike}
 

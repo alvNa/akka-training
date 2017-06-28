@@ -23,7 +23,7 @@ class RestServer(implicit val system: ActorSystem,
 
   def startServer(address: String = "localhost", port: Int = defaultPort): Future[ServerBinding] = {
     val bind = Http().bindAndHandle(route, address, port)
-    log.info("Test service up in: {} , {}", address, port)
+    log.debug("Test service up in: {} , {}", address, port)
     bind
   }
 

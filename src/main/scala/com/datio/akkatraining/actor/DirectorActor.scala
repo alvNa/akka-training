@@ -7,7 +7,9 @@ import com.datio.akkatraining.api.ValidClientSyntax._
 
 import scala.reflect.{ClassTag, classTag}
 
-abstract class DirectorActor[A: ClassTag: ValidClient](factory: ActorRefFactory => ActorRef) extends Actor
+abstract class DirectorActor[A: ClassTag](factory: ActorRefFactory => ActorRef)
+                                         (implicit ev: ValidClient[A])
+  extends Actor
   with ActorLogging {
 
   implicit val nextActor: ActorRef = factory(context)
