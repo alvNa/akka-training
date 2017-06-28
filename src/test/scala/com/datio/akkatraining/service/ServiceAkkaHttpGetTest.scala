@@ -18,14 +18,6 @@ class ServiceAkkaHttpGetTest extends WordSpec
   with BeforeAndAfterAll
   with Routes {
 
-//  override implicit val zoidBergBeer: ActorRef = ???
-//  //TestActorRef(ZoidBergBeerActor.props())
-//  override implicit val zoidBergPick: ActorRef = ???
-//  val securityActor = TestActorRef(ZoidBergPickActor.props((_: ActorRefFactory) => probe.ref))
-
-  //TestActorRef(ZoidBergPickActor.props())
-//  val probeLeela = TestProbe()
-//  val probeBender = TestProbe()
   val makerLeela: (ActorRefFactory) => ActorRef = (factory: ActorRefFactory) => factory.actorOf(LeelaActor.props(),
     "Leela-Actor")
   val makerBender: (ActorRefFactory) => ActorRef = (factory: ActorRefFactory) => factory.actorOf(BenderActor.props(),
