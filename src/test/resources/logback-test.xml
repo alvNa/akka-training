@@ -25,7 +25,7 @@
             <maxFileSize>50MB</maxFileSize>
         </triggeringPolicy>
     </appender>
-    <logger name="com.datio.akkatraining" level="${LOG_LEVEL}"/>
+    <!--<logger name="com.datio.akkatraining.actor.PoolActor" level="${LOG_LEVEL}"/>-->
 
     <root level="${LOG_LEVEL}">
         <appender-ref ref="FILE"/>
